@@ -1,0 +1,36 @@
+<nav th:fragment="commonNav" xmlns:th=http://www.thymeleaf.org>
+    <!--导航条提取-->
+    <div class="page_num_inf">
+        <i></i> 共
+        <span th:text="${pageInfo.pages}">12</span>页,共<span th:text="${pageInfo.total}">132</span>条
+    </div>
+    <div>
+        <ul class="pagination">
+            <li><a class="sameStart" th:href="@{/search(pn=1)}">首页</a></li>
+            <li class="threeword" th:if="${pageInfo.hasPreviousPage}"><a class="samePrevious" th:href="@{/search(pn=${pageInfo.prePage})}">上一页</a></li>
+            <li th:each="nav:${pageInfo.navigatepageNums}">
+                <a class="sameList"  th:href="@{/search(pn=${nav})}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}">如果当前的不是选中状态就是这个样式</a>
+                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" >这个是选中状态要显示的样式</span>
+            </li>
+            <li class="threeword" th:if="${pageInfo.hasNextPage}"><a class="sameNext" th:href="@{/search(pn=${pageInfo.nextPage})}">下一页</a></li>
+            <li class="threeword"><a  class="sameEnd" th:href="@{/search(pn=${pageInfo.pages})}" >末页</a></li>
+        </ul>
+    </div>
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

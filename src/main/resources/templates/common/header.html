@@ -21,7 +21,7 @@
         <div class="header_wrap">
             <div class="topbar">
                 <div class="logo">
-                    <a href="/"><img src="images/logo.jpg"  th:src="@{/images/logo.jpg}" alt=""></a>
+                    <a href="https://brand.lenovo.com.cn/"><img alt=""  src="images/logo.jpg" th:src="@{/images/logo.jpg}"></a>
                 </div>
                 <div class="search">
                     <form th:action="@{/search}">
@@ -55,16 +55,16 @@
         <!-- 首页导航 -->
         <div class="navitem">
             <ul class="nav">
-                <li class="nav-active"><a th:href="@{/index.html}">首页</a></li>
-                <li><a href="#">门票</a></li>
-                <li><a href="#">酒店</a></li>
-                <li><a href="#">香港车票</a></li>
-                <li><a href="#">出境游</a></li>
-                <li><a th:href="@{/search(searchContent=country)}">国内游</a></li>
-                <li><a href="#">港澳游</a></li>
-                <li><a href="#">抱团定制</a></li>
-                <li><a href="#">全球自由行</a></li>
-                <li><a th:href="@{/favoriteList}">收藏排行榜</a></li>
+                <li class="nav-active"><a class="nav_a" th:href="@{/index.html}">首页</a></li>
+                <li><a class="nav_a" href="../route_detail.html">门票</a></li>
+                <li><a class="nav_a" href="../route_detail.html">酒店</a></li>
+                <li><a class="nav_a" href="../route_detail.html">香港车票</a></li>
+                <li><a class="nav_a" href="../route_detail.html">出境游</a></li>
+                <li><a class="nav_a" th:href="@{/search(searchContent=country)}">国内游</a></li>
+                <li><a class="nav_a" href="../route_detail.html">港澳游</a></li>
+                <li><a class="nav_a" href="../route_detail.html">抱团定制</a></li>
+                <li><a class="nav_a" href="../route_detail.html">全球自由行</a></li>
+                <li><a class="nav_a" th:href="@{/favoriteList}">收藏排行榜</a></li>
             </ul>
         </div>
 

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>卓越旅游网-登录</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" href="/css/login.css" th:href="@{/css/login.css}">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--导入angularJS文件-->
+    <script src="js/angular.min.js" th:src="@{/js/angular.min.js}"></script>
+    <!--导入jquery-->
+    <script src="js/jquery-3.3.1.js" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<!--引入头部-->
+<!--<div id="header"></div>-->
+<div th:replace="common/header::commonHeader"></div>
+<!-- 头部 end -->
+<div id="tips">
+    <div id="tips_top">
+            <span>
+                受新冠疫情影响，各地疫情防控政策调整频繁，请在出行前务必与出发地、目
+                的地、经停（转）地疫情管控相关单位进一步确认核酸检测报告时限要求以及
+                落地管控政策，合理安排出行。如行程需持规定时效核酸检测报道，建议预留
+                充足时间提前完成核酸检测，涉疫地区始发的中转旅客，需在中转地预留充分
+                时间，以免耽误行程。
+            </span>
+    </div>
+    <div id="tips_down">
+        <button id="exit_button" onclick="button_index()">知道了</button>
+    </div>
+</div>
+<section id="login_wrap">
+    <div class="fullscreen-bg" style="background: url(images/login_bg.png);height: 532px;">
+
+    </div>
+    <div class="login-box">
+        <div class="title">
+            <img src="images/login_logo.png" th:src="@{images/login_logo.png}" alt="">
+            <span>欢迎登录卓越旅游账户</span>
+        </div>
+        <div class="login_inner">
+            <!--登录错误提示消息-->
+<!--            <div id="errorMsg" class="bg-info text-info "> <h4>请输入用户名密码进行登录</h4></div>-->
+<!--            <div id="errorMsg1" class="bg-danger text-danger hidden"> <h4>账号或密码有误！</h4></div>-->
+<!--            <br>-->
+            <div id="errorMsg"></div>
+            <form id="loginForm"  method="post" accept-charset="utf-8">
+<!--                <input type="hidden" name="action" value="login"/>-->
+                 <input id="username" name="username" type="text" placeholder="请输入账号" autocomplete="off"/>
+                <input id="password" name="password" type="password" placeholder="请输入密码" autocomplete="off"/>
+                <div class="verify">
+                    <input name="check" type="text" id="checkLoginCode" placeholder="请输入验证码" autocomplete="off">
+                    <span><img id="checks" src="checkCode" alt="" onclick="changeCheckCode(this)"></span>
+                    <script type="text/javascript">
+                        //图片点击事件
+                        function changeCheckCode(img) {
+                            img.src = "checkCode?" + new Date().getTime();
+                        }
+                    </script>
+                </div>
+                <div class="submit_btn">
+                    <button type="button" id="login_submit">登录</button>
+                </div>
+                    <div class="auto_login">
+                        <input type="checkbox" name="" class="checkbox">
+                        <span>自动登录</span>
+                    </div>
+            </form>
+            <div class="reg">没有账户？<a href="register.html">立即注册</a></div>
+        </div>
+    </div>
+<!--    <div type="hidden" id="test11" th:text="${session.CHECKCODE_SERVER}"></div>-->
+</section>
+<!--引入尾部
+    <div id="footer"></div>
+ jQuery (necessary for Bootstrap's JavaScript plugins)
+<script src="js/jquery-1.11.0.min.js" th:src="@{/js/jquery-1.11.0.min.js}"></script>
+ Include all compiled plugins (below), or include individual files as needed
+<script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+导入布局js，共享header和footer
+<script type="text/javascript" src="js/include.js" th:src="@{/js/include.js}"></script>-->
+</body>
+
+<div th:replace="common/footer::commonFooter"></div>
+<script>// 初始化
+// $(function () {
+//     $(document).keydown(function () {
+//         if (event.keyCode==13){
+//             a()
+//         }
+//     })
+// })
+// function a () {
+//     $.ajax({
+//         url:"/login",
+//         data:$("#loginForm").serialize(),
+//         type:"post",
+//         success:function (result) {
+//             if (result.code===100){
+//                 //登录成功
+//                 // alert("登录成功！")
+//                 $("#tips").attr("style","display:block");
+//                 $('#errorMsg1').addClass('hidden')
+//             }else{
+//                 //登录失败
+//                 //1.提示信息更改
+//                 // errorStatue()
+//                 if (result.extend.checkCodeLogin!==undefined){
+//                     alert(result.extend.checkCodeLogin)
+//                 }else if (result.code===200){
+//                     errorStatue()
+//                 }
+//             }
+//         },
+//         error:function () {
+//             errorStatue()
+//         }
+//     })
+// }
+
+
+/*$.ajax({
+    url:"/login",
+    data:$("#loginForm").serialize(),
+    type:"post",
+    success:function (result) {
+        if (result.code===100){
+            //登录成功
+            alert("登录成功！")
+            $('#errorMsg1').addClass('hidden')
+        }else{
+            //登录失败
+            //1.提示信息更改
+            // errorStatue()
+            if (result.extend.checkCodeLogin!==undefined){
+                alert(result.extend.checkCodeLogin)
+            }else if (result.code===200){
+                errorStatue()
+            }
+        }
+    },
+    error:function () {
+        errorStatue()
+    }
+
+})*/
+// $("#login_submit").click(function () {
+//     a()
+// })
+//
+// function errorStatue() {
+//     $('#errorMsg').addClass('hidden')
+//     $('#errorMsg1').removeClass('hidden')
+// }
+
+function checkUsername() {
+    //1.获取用户名值
+    var username = $("#username").val();
+    //2.定义正则
+    var reg_username = /^\w{8,20}$/;
+
+    //3.判断，给出提示信息
+    var flag = reg_username.test(username);
+    if (flag) {
+        //用户名合法
+        $("#username").css("border", "1px solid green");
+    } else {
+        //用户名非法,加一个红色边框
+        $("#username").css("border", "1px solid red");
+        $("#errorMsg").html("请输入账号！");
+    }
+
+    return flag;
+}
+
+//校验密码
+function checkPassword() {
+    //1.获取密码值
+    var password = $("#password").val();
+    //2.定义正则
+    var reg_password = /^\w{8,20}$/;
+
+    //3.判断，给出提示信息
+    var flag = reg_password.test(password);
+    if (flag) {
+        //密码合法
+        $("#password").css("border","1px solid green");
+    } else {
+        //密码非法,加一个红色边框
+        $("#password").css("border", "1px solid red");
+        $("#errorMsg").html("请输入密码！");
+    }
+
+    return flag;
+}
+
+
+
+//验证验证码
+function checkCheck() {
+    //1.获取验证码值
+    var check = $("#checkLoginCode").val();
+    //2.定义正则
+    var reg_check = /^\w{4}$/;
+
+    //3.判断，给出提示信息
+    var flag = reg_check.test(check);
+    if (flag) {
+        //验证密码合法
+        $("#checkLoginCode").css("border","1px solid green");
+    } else {
+        //验证码非法,加一个红色边框
+        $("#checkLoginCode").css("border", "1px solid red");
+        $("#errorMsg").html("请输入验证码！");
+    }
+
+    return flag;
+}
+
+$(function () {
+    //当表单提交时，调用所有的校验方法
+    $("#login_submit").click(function () {
+        //1.发送数据到服务器
+        if (checkUsername() && checkPassword() && checkCheck()) {
+            $.post("login", $("#loginForm").serialize(), function (data) {
+                if (data.code === 100) {
+                    //登录成功，跳转成功页面
+                    $("#tips").attr("style","display:block");
+                } else {
+                    //登录失败,给errorMsg添加提示信息
+                    $("#errorMsg").html(data.msg);
+                }
+            });
+        }
+        //2.不让页面跳转
+        return false;
+        //如果这个方法没有返回值，或者返回为true，则表单提交，如果返回为false，则表单不提交
+    });
+
+    //当某一个组件失去焦点是，调用对应的校验方法
+    $("#username").blur(checkUsername);
+    $("#password").blur(checkPassword);
+    $("#checkLoginCode").blur(checkCheck);
+});
+
+// $(function () {
+//     setInterval(function () {
+//         $(".verify").load(location.href + " .verify")
+//     },12000);
+// });
+function button_index(){
+    location.href = "index.html";
+}
+</script>
+</html>

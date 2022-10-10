@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" href="css/register.css" th:href="@{/css/register.css}">
+    <link href="css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!--导入jquery-->
+    <script src="js/jquery-3.3.1.js" th:href="@{/js/jquery-3.3.1.js}"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            min-height: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!--引入头部-->
+<!--<div id="header"></div>-->
+<div th:replace="common/header::commonHeader"></div>
+<!-- 头部 end -->
+<div class="rg_layout">
+    <div class="rg_form clearfix">
+        <div class="rg_form_left">
+            <p style="width: 850px">新用户注册</p>
+            <p style="width: 850px">USER REGISTER</p>
+        </div>
+        <div>
+            <!--注册表单-->
+            <!-- <table style="margin-top: 25px;">
+                 <tr>
+                     <td class="td_left">
+                         <label for="username">用户名</label>
+                     </td>
+                     <td class="td_right">
+                         <input type="text" id="username" name="username" placeholder="请输入账号">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                         <label for="password">密码</label>
+                     </td>
+                     <td class="td_right">
+                         <input type="password" id="password" name="password" placeholder="请输入密码">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left" >
+                         <label for="email">Email</label>
+                     </td>
+                     <td class="td_right">
+                         <input type="text" id="email" name="email" placeholder="请输入Email">
+                     </td>
+                &lt;!&ndash;     <td>
+                         dasdlkasjdkl
+                     </td>&ndash;&gt;
+                   &lt;!&ndash;  <td>
+                         <div class="form-group col-md-offset-2">
+                             <label for="email" class="col-sm-2 control-label">Email</label>
+                         </div>
+                     </td>
+                     <td>
+                         <div class="col-md-12">
+                             <input type="text" class="form-control" name="email" id="email"
+                                    placeholder="xx@atguigu.com">
+                             <span class="help-block"></span>
+                         </div>
+                     </td>&ndash;&gt;
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                         <label for="name">姓名</label>
+                     </td>
+                     <td class="td_right">
+                         <input type="text" id="name" name="name" placeholder="请输入真实姓名">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                         <label for="telephone">手机号</label>
+                     </td>
+                     <td class="td_right">
+                         <input type="text" id="telephone" name="telephone" placeholder="请输入您的手机号">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                         <label for="sex">性别</label>
+                     </td>
+                     <td class="td_right gender">
+                         <input type="radio" id="sex" name="sex" value="男" checked> 男
+                         <input type="radio" name="sex" value="女"> 女
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                         <label for="birthday">出生日期</label>
+                     </td>
+                     <td class="td_right">
+                         <input type="date" id="birthday" name="birthday" placeholder="年/月/日">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                         <label for="check">验证码</label>
+                     </td>
+                     <td class="td_right check">
+                         <input type="text" id="check" name="check" class="check">
+                         <img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+                         <script type="text/javascript">
+                             //图片点击事件
+                             function changeCheckCode(img) {
+                                 img.src = "checkCode?" + new Date().getTime();
+                             }
+                         </script>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="td_left">
+                     </td>
+                     <td class="td_right check">
+                         <input type="submit" class="submit" value="注册">
+                         <span id="msg" style="color: red;"></span>
+                     </td>
+                 </tr>
+             </table>-->
+
+            <form class="form-horizontal col-sm-offset-3" id="registerForm">
+                <!--提交处理请求的标识符，还未用到，猜测标识符的作用：和Login共用一个方法，若有此标识符则走A方法，否则走B-->
+                <!--                <input type="hidden" name="action" value="register">-->
+                <div class="form-group has-feedback">
+                    <label for="username" class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="username">
+                    </div>
+                    <div class="col-sm-5" style="padding-left: 0;padding-right: 0;">
+                        <span class="help-block">英文和数字3~16位或中文2~5位</span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" name="password" id="password"
+                               placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label for="email" class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-5">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="xx@zz.com">
+                    </div>
+                    <div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="name" class="col-sm-2 control-label">姓名</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="realName">
+                    </div>
+                    <div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="telephone" class="col-sm-2 control-label">手机号</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="telephone" id="telephone" placeholder="telephone">
+                    </div>
+                    <div class="col-sm-2" style="padding-left: 0;padding-right: 0;">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">性别</label>
+                    <div class="col-sm-10">
+                        <div class="checkbox">
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="input_add_btn1" value="M" checked="checked"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="input_add_btn2" value="F"> 女
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthday" class="col-sm-2 control-label">出生日期</label>
+                    <div class="col-sm-5">
+                        <input type="date" class="form-control" style="line-height: normal" name="birthday"
+                               id="birthday" placeholder="年/月/日">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="check" class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="check" name="check" class="form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+                        <script type="text/javascript">
+                            //图片点击事件
+                            function changeCheckCode(img) {
+                                img.src = "checkCode?" + new Date().getTime();
+                            }
+                        </script>
+                    </div>
+                    <div class="col-sm-4 has-error" id="checkCodeTip">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-primary" id="submitRegister">提交</button>
+                </div>
+
+            </form>
+            <div class="rg_form_right col-sm-offset-9">
+                <p>
+                    已有账号？
+                    <a href="login.html">立即登录</a>
+                </p>
+            </div>
+
+
+
+
+
+
+        </div>
+
+    </div>
+    <!-- loading -->
+    <div class="modal fade" id="loading1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body">
+                    请稍候。。。<span id="result"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/footer::commonFooter"></div>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+<script>
+
+
+    //1.校验邮箱
+    function validate_email() {
+
+        //获取输入的email
+        var email = $("#email").val();
+        var regxEmail = /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+        if (!regxEmail.test(email)) {
+            // alert("邮箱格式不正确！")
+            validate_info_warn("#email", "error", "邮箱格式不正确!");
+            return false;
+        } else {
+            validate_info_warn("#email", "success", "邮箱格式正确");
+        }
+        return true;
+    }
+
+    //检测邮箱是否正确，给予提示,实时监测,还有一种是用定时器去检查
+    $("#email").on("input", function () {
+        validate_email()
+    })
+
+    //2.校验用户名
+    function validate_name() {
+        var username = $("#username").val();
+        //必须是英文和数字3-16位或中文2-5位
+        var regxUsername = /(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
+        //提示信息
+        if (!regxUsername.test(username)) {
+            validate_info_warn("#username", "error", "必须是英文和数字3-16位或中文2-5位")
+            return false
+        } else {
+            validate_info_warn("#username", "success", "用户名可用")
+        }
+        return true
+    }
+
+    $("#username").on("input", function () {
+        validate_name()
+    })
+
+    //3.校验姓名
+    function validate_realName() {
+        var realName = $("#name").val();
+        //匹配空值
+        var regxRealName = /^\s*$/;
+        //提示信息
+        if (regxRealName.test(realName)) {
+            validate_info_warn("#name", "error", "姓名不能为空!！")
+            return false
+        } else {
+            validate_info_warn("#name", "success", "")
+        }
+        return true
+    }
+
+    $("#name").on("input", function () {
+        validate_realName()
+    })
+
+    //4.校验手机号
+    function validate_telephone() {
+        var telephone = $("#telephone").val();
+        //匹配手机号
+        var regxTelephone = /^[1][3,4,5,7,8][0-9]{9}$/;
+        //提示信息
+        if (!regxTelephone.test(telephone)) {
+            validate_info_warn("#telephone", "error", "请输入真实的手机号！")
+            return false
+        } else {
+            validate_info_warn("#telephone", "success", "")
+        }
+        return true
+    }
+
+    $("#telephone").on("input", function () {
+        validate_telephone()
+    })
+
+    //数据校验信息提取
+    function validate_info_warn(ele, status, msg) {
+        //数据校验前先清空class，防止样式堆叠
+        $(ele).parent().removeClass("has-success has-error")
+        $(ele).parent().next().removeClass("has-success has-error")
+        //实验证明：每次定位元素之后，获取的内容都是元素里的内容，不包含它自身
+        /*原生js代码比较好解决，和innerHTML还有一个对应的outerHTML。但jquery就没有对应的方法于是对应了，只能间接去调用原生js语法jQuery.prop("outerHTML");
+　　从这点我们可以看出，jquery的prop()方法，实际上是在以js原生对象的方式操作节点。*/
+        //测试元素位置可以用html()+alert()的方式
+        $(ele).parent().next().children('span').text("")
+        //先删除原来的span标签 这个标签是用来添加醒目标识的
+        $(ele).next('span').remove()
+
+        if ("success" === status) {
+            $(ele).parent().addClass("has-success")
+            $(ele).parent().append("<span class=\"glyphicon glyphicon-ok form-control-feedback\" aria-hidden=\"true\"></span>")
+            $(ele).parent().next().addClass("has-success").children('span').text(msg)
+        } else if ("error" === status) {
+            $(ele).parent().addClass("has-error")
+            $(ele).parent().append("<span class=\"glyphicon glyphicon-remove form-control-feedback\" aria-hidden=\"true\"></span>")
+            $(ele).parent().next().addClass("has-error").children('span').text(msg)
+        }
+
+    }
+    function emailCodeF() {
+        //通过写一个函数的方式，来恢复prompt()阻塞式运行
+        return prompt("已向你的邮箱地址发送激活码，请输入:");
+    }
+
+
+    //3.提交成功弹出警示框
+    $("#submitRegister").click(function () {
+
+        if (validate_email() && validate_name()) {//
+            //都通过的情况
+            // alert("提交成功！")
+            $.ajax({
+                url: "/addUser",
+                data: $("#registerForm").serialize(),
+                type: "POST",
+                //使用post时,必须这么写:application/x-www-form-urlencoded
+                // contentType: "application/x-www-form-urlencoded",
+                success: function (result) {//通过自定义的状态码来显示对应的信息
+                    if (result.code === 100) {
+                        // alert(result.code)
+                        if (result.extend.success!==undefined){
+                            alert(result.extend.success)
+                        }
+                        if (result.extend.userRepeat!==undefined){
+                            alert(result.extend.userRepeat)
+                        }
+                        //激活码之前，获取表格的信息发送email和username
+                        var email = $("#email").val();
+                        var username = $("#username").val();
+
+
+                        $.ajax({
+                            url:"/sendEmailAndUsername",
+                            type: "GET",
+                            data: {'email': email, 'username': username,'emailCode':"sendEmail"},
+                            dataType: "json"
+                        })
+
+                        var emailCode = emailCodeF();
+
+                        if (emailCode!==null){
+
+                            showLoading()
+                        }else{
+
+                            return;
+                        }
+
+                        //激活码之后，验证激活码是否正确
+                        $.ajax({
+                                url: "/emailCodeCheck",
+                                type: "GET",
+                                data: {'emailCode': emailCode, 'email': email, 'username': username},
+                                dataType: "json",
+                                success: function (result1) {
+                                    //当激活码提交之后，后台验证并返回结果 msg.success,msg.fail
+                                    if (result1.code === 100) {
+                                        alert("123")
+                                        hideLoading()
+                                        //替换掉href跳转，replace不会有历史记录，也就不能返回上一步了
+                                        location.replace("/register_ok.html")
+
+                                    }else{
+                                        if (result1.extend.activeStatus!==undefined){
+                                            alert(result1.extend.activeStatus)
+                                        }
+                                        if (result1.extend.activeStatus1!==undefined){
+                                            alert(result1.extend.activeStatus1)
+                                            location.reload();
+                                        }
+                                        hideLoading()
+                                    }
+                                },
+                                error:function () {
+
+                                    hideLoading()
+                                }
+
+                            })
+                    } else {
+                        alert("注册失败")
+                        if (result.extend.checkCode !== undefined) {
+                            $("#checkCodeTip").addClass("has-error")
+                            $("#checkCodeTip").children('span').text("验证码有误！")
+                        }
+
+                        if (result.extend.usern !== undefined) {
+                            validate_info_warn("#username", "error", result.extend.usern)
+                        }
+
+                        //这边要进行二次验证，验证信息从后台传过来
+                        if (result.extend.errorField.email !== undefined) {
+                            validate_info_warn("#email", "error", result.extend.errorField.email)
+                        }
+                        if (result.extend.errorField.username !== undefined) {
+                            validate_info_warn("#username", "error", result.extend.errorField.username)
+                        }
+                        if (result.extend.errorField.name !== undefined) {
+                            validate_info_warn("#name", "error", result.extend.errorField.name)
+                        }
+                        if (result.extend.errorField.telephone !== undefined) {
+                            validate_info_warn("#telephone", "error", result.extend.errorField.telephone)
+                        }
+
+
+                    }
+                },
+                /* error:function (result) {
+                     alert(result.extend.errorField+"22222")
+                     alert(result.extend.errorField.username+"8888")
+                     alert(result.extend.errorField.email+"9999")
+                     alert(result.code)
+                 }*/
+            })
+        } else {
+            //不通过的情况
+            alert("提交失败！请检查用户名或邮箱")
+            return false
+
+        }
+    })
+    function showLoading(){
+        $('#loading1').modal({backdrop:"static", keyboard:false}).modal('show');
+    }
+    function hideLoading(){
+        $("#loading1").modal('hide');
+    }
+    /* $(function(){
+      showLoading();
+      setTimeout(function(){
+          hideLoading();
+      },3000);
+  })*/
+
+</script>
+
+</body>
+
+</html>

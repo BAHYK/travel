@@ -1,0 +1,72 @@
+<!-- 头部 start -->
+    <header id="header" th:fragment="commonHeader" xmlns:th=http://www.thymeleaf.org >
+        <!--导入jquery-->
+        <script src="js/jquery-3.3.1.js" th:href="@{/js/jquery-3.3.1.js}"></script>
+        <div class="top_banner">
+            <img src="images/top_banner.jpg" th:src="@{/images/top_banner.jpg}"  alt="">
+        </div>
+        <div class="shortcut">
+            <!-- 未登录状态  -->
+            <div class="login_out" th:if="not ${session.user}">
+                <a href="../login.html">登录</a>
+                <a th:href="@{/register.html}">注册</a>
+            </div>
+            <!-- 登录状态  -->
+            <div class="login" th:if="${session.user}">
+                <span th:text="'欢迎回来,'+${session.user.username}" >欢迎回来，admin</span>
+                <a th:href="@{/myfavorite}" class="collection">我的收藏</a>
+                <a th:href="@{/exit}">退出</a>
+            </div>
+        </div>
+        <div class="header_wrap">
+            <div class="topbar">
+                <div class="logo">
+                    <a href="https://brand.lenovo.com.cn/"><img src="images/logo.jpg"  th:src="@{/images/logo.jpg}" alt=""></a>
+                </div>
+                <div class="search">
+                    <form th:action="@{/search}">
+                        <input id="searchName" name="searchContent" type="text" placeholder="请输入路线名称" class="search_input" autocomplete="off">
+
+                        <button class="search-button" id="button_search">搜索</button>
+                    </form>
+                    <script>
+                        $("#button_search").click(function (){
+                            var searchName = $("#searchName").val();
+                            var s = searchName.trim();
+                            if (s===""){
+                                alert("路线不能为空！")
+                                return false;
+                            }
+                        })
+                    </script>
+
+                </div>
+                <div class="hottel">
+                    <div class="hot_pic">
+                        <img src="images/hot_tel.jpg" th:src="@{/images/hot_tel.jpg}" alt="">
+                    </div>
+                    <div class="hot_tel">
+                        <p class="hot_time">客服热线(9:00-6:00)</p>
+                        <p class="hot_num">400-618-9090</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 首页导航 -->
+        <div class="navitem">
+            <ul class="nav">
+                <li class="nav-active"><a class="nav_a" th:href="@{/index.html}">首页</a></li>
+                <li><a class="nav_a" href="../route_detail.html">门票</a></li>
+                <li><a class="nav_a" href="../route_detail.html">酒店</a></li>
+                <li><a class="nav_a" href="../route_detail.html">香港车票</a></li>
+                <li><a class="nav_a" href="../route_detail.html">出境游</a></li>
+                <li><a class="nav_a" th:href="@{/search(searchContent=country)}">国内游</a></li>
+                <li><a class="nav_a" href="../route_detail.html">港澳游</a></li>
+                <li><a class="nav_a" href="../route_detail.html">抱团定制</a></li>
+                <li><a class="nav_a" href="../route_detail.html">全球自由行</a></li>
+                <li><a class="nav_a" th:href="@{/favoriteList}">收藏排行榜</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <!-- 头部 end -->
